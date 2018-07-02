@@ -9,12 +9,12 @@ import cn.kgc.model.Novel;
 import cn.kgc.service.intf.Service;
 import cn.kgc.util.Prompt;
 
-public class WuxiaServiceImpl implements Service,Prompt{
+public class NovelServiceImpl implements Service,Prompt{
 	NovelDao novelDao = new NovelDaoImpl();
 
 	@Override
 	public DataTransmission start(DataTransmission data) {
-		List<Novel> novelLiset = novelDao.getAllByType(WUXIA_TYPE);
+		List<Novel> novelLiset = novelDao.getAllByType(data.getCommand());
 		System.out.println(novelLiset);
 		if(novelLiset != null) {
 			data.setObject(novelLiset);

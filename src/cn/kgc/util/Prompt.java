@@ -4,8 +4,6 @@ public interface Prompt {
 	String USER_NOT_EXIST = "该用户名不存在或密码错误！";		//用户不存在
 	String USER_EXIST = "该用户名已经注册了！";	//用户存在
 	String CONNECTION = "  正在连接，指令：";	//服务器输出链接内容
-	String WUXIA_TYPE = "wuxia";	//武侠
-	String YANQING_TYPE = "yanqing";	//言情
 	String NOVEL_NAME = "name";	//小说名称xml标签名称
 	String NOVEL_AUTHOR = "author";	//小说作者xml标签名称
 	String NOVEL_DESCRIPTION = "description";	//小说简介xml标签名称
