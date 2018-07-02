@@ -15,11 +15,13 @@ public class WuxiaServiceImpl implements Service,Prompt{
 	@Override
 	public DataTransmission start(DataTransmission data) {
 		List<Novel> novelLiset = novelDao.getAllByType(WUXIA_TYPE);
-		if(novelLiset.size() != 0) {
+		System.out.println(novelLiset);
+		if(novelLiset != null) {
 			data.setObject(novelLiset);
 			data.setStatus(SUCCUSS);
+		} else {
+			data.setStatus(ERORR);			
 		}
-		data.setStatus(ERORR);
 		return data;
 	}
 }

@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao{
 	 * 初始化一些账号
 	 */
 	static {
-		userList.add(new User("xuxin","123456"));
+		userList.add(new User("xuxin333","123"));
 	}
 	/**
 	 * 根据账号密码注册

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,16 +31,20 @@ public class XMLUtils implements Prompt {
 			p.load(is);
 			Set<Object> set = p.keySet();
 			for (Object str : set) {
+				List<Novel> novelList = new ArrayList<>();
 				Document document = reader.read(new FileReader((String)p.get(str)));
 				Element root = document.getRootElement();
-				List<Element> novelList = root.elements();
-				for (Element element : novelList) {
+				List<?> novelNodeList = root.elements();
+				for (Object element : novelNodeList) {
 					Novel novel = new Novel();
-					novel.setName(element.element(NOVEL_NAME).getText());
-					novel.setAuthor(element.element(NOVEL_AUTHOR).getText());
-					novel.setDescribe(element.element(NOVEL_DESCRIPTION).getText());
-					novel.setFileName(element.element(NOVEL_FILENAME).getText());
+					Element elm = (Element)element;
+					novel.setName(elm.element(NOVEL_NAME).getText());
+					novel.setAuthor(elm.element(NOVEL_AUTHOR).getText());
+					novel.setDescribe(elm.element(NOVEL_DESCRIPTION).getText());
+					novel.setFileName(elm.element(NOVEL_FILENAME).getText());
+					novelList.add(novel);
 				}
+				novelMap.put(str.toString(),novelList);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -48,5 +53,10 @@ public class XMLUtils implements Prompt {
 		}  catch (DocumentException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	public static Map<String, List<Novel>> getMap() {
+		return novelMap;
 	}
 }
