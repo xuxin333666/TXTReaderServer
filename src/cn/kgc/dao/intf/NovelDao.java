@@ -18,4 +18,10 @@ public interface NovelDao {
 	 * @return
 	 */
 	boolean isContains(String name,String type);
+	/**
+	 * 上传小说，dao保存小说，并写入XML文件
+	 * @param novel
+	 * @param type
+	 */
+	void uploadNovel(Novel novel, String type);
 }

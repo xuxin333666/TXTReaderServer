@@ -36,6 +36,7 @@ public interface Prompt {
 	String WUXIA = "武侠";	//	武侠命令
 	String YANQING = "言情";	//言情命令
 	String NOVE_LIST_PRINT = "序号\t小说名\t作者\t简介";	//小说列表输出
+	String NOVEL_ELM = "novel";	//小说XML的标签名 
 	String NOVEL_NAME = "name";	//小说名称的XML标签名
 	String NOVEL_AUTHOR = "author";	//小说作者的XML标签名
 	String NOVEL_DESCRIPTION = "description";	//小说简介的XML标签名
@@ -48,7 +49,7 @@ public interface Prompt {
 	String UPLOAD_PATH = "请输入上传的TXT（请注意路径用/或者\\）：";		//上传时的提示
 	String UPLOAD_SUCCESS = "小说保存成功";	//上传成功时的提示
 	String UPLOAD_ERORR_CLIENT = "小说上传失败，请确认上传地址正确";	//本地上传失败时的提示
-	String UPLOAD_ERORR_SERVER = "小说上传失败，请确认网络正常";	//网络上传失败时的提示
+	String UPLOAD_ERORR_SERVER = "小说上传失败，已有同名小说，请更换名字";	//网络上传失败时的提示
 	String UPLOAD_CONTINUE = "继续上传请输入-1，返回请输入0：";	//询问是否继续上传
 	int MAIN_MENU = 1;	//主菜单
 	int SECOND_MENU = 2;	//二级菜单

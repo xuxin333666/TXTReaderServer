@@ -1,10 +1,12 @@
 package cn.kgc.dao.impl;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.dom4j.DocumentException;
 
 import cn.kgc.dao.intf.NovelDao;
 import cn.kgc.model.Novel;
@@ -37,6 +39,23 @@ public class NovelDaoImpl implements NovelDao{
 		Novel novel = new Novel();
 		novel.setName(name);	
 		return list.contains(novel);
+	}
+	/**
+	 * 上传小说，dao保存小说，并写入XML文件
+	 * @param novel
+	 * @param type
+	 */
+	@Override
+	public void uploadNovel(Novel novel, String type) {
+		List<Novel> list = getAllByType(type);
+		list.add(novel);
+		try {
+			XMLUtils.upload(novel,type);
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

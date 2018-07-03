@@ -18,8 +18,12 @@ public class UploadServiceImpl implements Service,Prompt{
 		Novel novel = (Novel)data.getObject();
 		String name = novel.getName();
 		boolean flag = novelDao.isContains(name, type);
-		System.out.println(flag);
+		if(flag) {
+			data.setStatus(ERORR);
+			return data;
+		}
 		data.setStatus(SUCCUSS);
+		novelDao.uploadNovel(novel,type);
 		return data;
 	}
 
