@@ -15,10 +15,9 @@ public class NovelServiceImpl implements Service,Prompt{
 	@Override
 	public DataTransmission start(DataTransmission data) {
 		List<Novel> novelLiset = novelDao.getAllByType(data.getCommand());
-		System.out.println(novelLiset);
 		if(novelLiset != null) {
 			data.setObject(novelLiset);
-			data.setStatus(SUCCUSS);
+			data.setStatus(THIRD_RUN_MENU);
 		} else {
 			data.setStatus(ERORR);			
 		}
