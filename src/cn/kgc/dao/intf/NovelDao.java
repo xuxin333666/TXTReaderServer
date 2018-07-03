@@ -1,5 +1,6 @@
 package cn.kgc.dao.intf;
 
+import java.io.IOException;
 import java.util.List;
 
 import cn.kgc.model.Novel;
@@ -24,4 +25,11 @@ public interface NovelDao {
 	 * @param type
 	 */
 	void uploadNovel(Novel novel, String type);
+	/**
+	 * 根据文件地址获取小说内容
+	 * @param fileName
+	 * @return
+	 * @throws IOException 
+	 */
+	String getNovelContent(String fileName) throws IOException;
 }

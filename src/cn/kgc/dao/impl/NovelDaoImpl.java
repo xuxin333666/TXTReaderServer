@@ -10,6 +10,7 @@ import org.dom4j.DocumentException;
 
 import cn.kgc.dao.intf.NovelDao;
 import cn.kgc.model.Novel;
+import cn.kgc.util.NovelUtils;
 import cn.kgc.util.XMLUtils;
 
 public class NovelDaoImpl implements NovelDao{
@@ -56,6 +57,16 @@ public class NovelDaoImpl implements NovelDao{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 根据文件地址获取小说内容
+	 * @param fileName
+	 * @return
+	 * @throws IOException 
+	 */
+	@Override
+	public String getNovelContent(String fileName) throws IOException {
+		return NovelUtils.getNovelContent(fileName);
 	}
 
 }

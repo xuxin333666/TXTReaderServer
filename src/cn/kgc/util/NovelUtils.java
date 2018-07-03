@@ -67,5 +67,24 @@ public class NovelUtils {
 	public static String getUploadCommandByCommand(String string) {	
 		return commandMap.get(string);
 	}
+	/**
+	 * 根据文件地址获取小说内容
+	 * @param fileName
+	 * @return
+	 * @throws IOException 
+	 */
+	public static String getNovelContent(String fileName) throws IOException {
+		System.out.println(fileName);
+		System.out.println("novel/" + fileName);
+		Reader reader = new FileReader("novel/" + fileName);
+		BufferedReader br = new BufferedReader(reader);
+		StringBuilder sb = new StringBuilder();
+		System.out.println(1111);
+		for(int i=0;i<10;i++) {
+			sb.append(br.readLine());
+		}		
+		br.close();
+		return sb.toString();
+	}
 
 }
