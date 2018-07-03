@@ -25,5 +25,18 @@ public class NovelDaoImpl implements NovelDao{
 	public List<Novel> getAllByType(String type) {
 		return novelMap.get(type);
 	}
+	
+	/**
+	 * 根据给定的名字查找同类型中是否有同名的
+	 * @param name
+	 * @param type
+	 * @return
+	 */
+	public boolean isContains(String name,String type) {
+		List<Novel> list = getAllByType(type);
+		Novel novel = new Novel();
+		novel.setName(name);	
+		return list.contains(novel);
+	}
 
 }

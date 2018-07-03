@@ -11,4 +11,11 @@ public interface NovelDao {
 	 * @return 返回列表字符串
 	 */
 	List<Novel> getAllByType(String type); 
+	/**
+	 * 根据给定的名字查找同类型中是否有同名的
+	 * @param name
+	 * @param type
+	 * @return
+	 */
+	boolean isContains(String name,String type);
 }
