@@ -17,7 +17,7 @@ public class DownloadServiceImpl implements Service,Prompt {
 		Novel novel = (Novel)data.getObject();
 		String content;
 		try {
-			content = novelDao.getNovelContent(novel.getFileName(), novel.getType(),true);
+			content = novelDao.getNovelContent(novel.getFileName(), novel.getType(),true,0);
 			data.setResult(content);
 			data.setStatus(SUCCUSS);
 		} catch (IOException e) {

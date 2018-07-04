@@ -17,8 +17,10 @@ public class ReadNovelServiceImpl implements Service,Prompt {
 		Novel novel = (Novel)data.getObject();
 		String fileName = novel.getFileName();
 		String type = novel.getType();
+		int count = novel.getCount();
 		try {
-			String content = novelDao.getNovelContent(fileName,type,false);
+			String content = novelDao.getNovelContent(fileName,type,false,count);
+			novel.setCount(++count);
 			data.setStatus(SUCCUSS);
 			data.setResult(content);
 		} catch (IOException e) {

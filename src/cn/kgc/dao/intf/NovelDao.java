@@ -30,8 +30,9 @@ public interface NovelDao {
 	 * @param fileName
 	 * @param type 
 	 * @param b 
+	 * @param count 
 	 * @return
 	 * @throws IOException 
 	 */
-	String getNovelContent(String fileName, String type, boolean b) throws IOException;
+	String getNovelContent(String fileName, String type, boolean b, int count) throws IOException;
 }

@@ -57,7 +57,7 @@ public class NovelUtils {
 	 * @return
 	 * @throws IOException 
 	 */
-	public static String getNovelContent(String fileName, String type, boolean flag) throws IOException  {
+	public static String getNovelContent(String fileName, String type, boolean flag,int index) throws IOException  {
 		Reader reader = new FileReader("novel/" + type + "/" + fileName);
 		BufferedReader br = new BufferedReader(reader);
 		StringBuilder sb = new StringBuilder();
@@ -68,8 +68,8 @@ public class NovelUtils {
 			}
 		} else {
 			for(int i=0;i<10;i++) {
-				sb.append(br.readLine() + "\n");
-			}				
+				sb.append(br.readLine());							
+			}
 		}
 		br.close();
 		return sb.toString();
