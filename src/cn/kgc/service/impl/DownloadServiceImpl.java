@@ -9,18 +9,17 @@ import cn.kgc.model.Novel;
 import cn.kgc.service.intf.Service;
 import cn.kgc.util.Prompt;
 
-public class ReadNovelServiceImpl implements Service,Prompt {
+public class DownloadServiceImpl implements Service,Prompt {
 	NovelDao novelDao = new NovelDaoImpl();
-
+	
 	@Override
 	public DataTransmission start(DataTransmission data) {
 		Novel novel = (Novel)data.getObject();
-		String fileName = novel.getFileName();
-		String type = novel.getType();
+		String content;
 		try {
-			String content = novelDao.getNovelContent(fileName,type,false);
-			data.setStatus(SUCCUSS);
+			content = novelDao.getNovelContent(novel.getFileName(), novel.getType(),true);
 			data.setResult(content);
+			data.setStatus(SUCCUSS);
 		} catch (IOException e) {
 			data.setStatus(ERORR);
 		}

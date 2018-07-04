@@ -57,6 +57,10 @@ public interface Prompt {
 	String UPLOAD_CONTINUE = "继续上传请输入-1，返回请输入0：";	//询问是否继续上传
 	String READ_ERORR = "小说读取失败，服务端找不到源文件";	//读取文件失败时的提示	
 	String READ_ISCONTINUE = "是否继续阅读，继续请输入-1，返回输入0：";	//是否继续阅读提示	
+	String DOWNLOAD_ASK_PASH = "请输入下载地址（请注意路径用/或者\\，输入空则默认为c:/download）：";	//要求用户输入下载地址
+	String DOWNLOAD_DEFAULT_PASH = "c:/download";	//默认下载地址	
+	String DOWNLOAD_SUCCUSS = "小说下载成功";	//下载成功提示	
+	String DOWNLOAD_ERORR = "小说下载失败，请检查下载地址是否正确";	//下载失败提示
 	int MAIN_MENU = 1;	//主菜单
 	int SECOND_MENU = 2;	//二级菜单
 	int THIRD_MENU = 3;	//三级菜单

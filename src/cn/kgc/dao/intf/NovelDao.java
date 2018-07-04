@@ -29,8 +29,9 @@ public interface NovelDao {
 	 * 根据文件地址获取小说内容
 	 * @param fileName
 	 * @param type 
+	 * @param b 
 	 * @return
 	 * @throws IOException 
 	 */
-	String getNovelContent(String fileName, String type) throws IOException;
+	String getNovelContent(String fileName, String type, boolean b) throws IOException;
 }

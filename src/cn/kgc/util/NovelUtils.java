@@ -42,6 +42,14 @@ public class NovelUtils {
 	public static String getUploadCommandByCommand(String string) {	
 		return commandMap.get(string);
 	}
+
+	
+	public static void writeFile(Novel novel) throws IOException {
+		Writer writer = new FileWriter("novel/" + novel.getType() + "/" + novel.getName() + ".txt");
+		writer.write(novel.getContent());
+		writer.close();
+	}
+	
 	/**
 	 * 根据文件地址获取小说内容
 	 * @param fileName
@@ -49,22 +57,22 @@ public class NovelUtils {
 	 * @return
 	 * @throws IOException 
 	 */
-	public static String getNovelContent(String fileName, String type) throws IOException {
+	public static String getNovelContent(String fileName, String type, boolean flag) throws IOException  {
 		Reader reader = new FileReader("novel/" + type + "/" + fileName);
 		BufferedReader br = new BufferedReader(reader);
 		StringBuilder sb = new StringBuilder();
-		for(int i=0;i<10;i++) {
-			sb.append(br.readLine() + "\n");
-		}		
+		if(flag) {
+			String str;
+			while((str = br.readLine()) != null) {
+				sb.append(str + "\n");
+			}
+		} else {
+			for(int i=0;i<10;i++) {
+				sb.append(br.readLine() + "\n");
+			}				
+		}
 		br.close();
 		return sb.toString();
-	}
-	
-	
-	public static void writeFile(Novel novel) throws IOException {
-		Writer writer = new FileWriter("novel/" + novel.getType() + "/" + novel.getName() + ".txt");
-		writer.write(novel.getContent());
-		writer.close();
 	}
 
 }
