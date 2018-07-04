@@ -65,8 +65,8 @@ public class NovelDaoImpl implements NovelDao{
 	 * @throws IOException 
 	 */
 	@Override
-	public String getNovelContent(String fileName) throws IOException {
-		return NovelUtils.getNovelContent(fileName);
+	public String getNovelContent(String fileName,String type) throws IOException {
+		return NovelUtils.getNovelContent(fileName,type);
 	}
 
 }

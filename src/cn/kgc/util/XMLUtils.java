@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,10 +20,13 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 import cn.kgc.model.Novel;
+import cn.kgc.model.User;
 
 public class XMLUtils implements Prompt {
 	private static Map<String, List<Novel>> novelMap = new HashMap<>();
-	private static Properties p;
+	private static List<User> UserList = new ArrayList<>();
+	private static Properties pNovel;
+	private static Properties pUser;
 	private static Set<Object> set;
 	private static SAXReader reader;
 	private static InputStream is;
@@ -34,13 +36,13 @@ public class XMLUtils implements Prompt {
 	static {
 		try {
 			is = new FileInputStream("config/novel.properties");
-			p = new Properties();
+			pNovel = new Properties();
 			reader = new SAXReader();
-			p.load(is);
-			set = p.keySet();
+			pNovel.load(is);
+			set = pNovel.keySet();
 			for (Object str : set) {
 				List<Novel> novelList = new ArrayList<>();
-				Document document = reader.read(new FileReader((String)p.get(str)));
+				Document document = reader.read(new FileReader((String)pNovel.get(str)));
 				root = document.getRootElement();
 				List<?> novelNodeList = root.elements();
 				for (Object element : novelNodeList) {
@@ -50,9 +52,22 @@ public class XMLUtils implements Prompt {
 					novel.setAuthor(elm.element(NOVEL_AUTHOR).getText());
 					novel.setDescribe(elm.element(NOVEL_DESCRIPTION).getText());
 					novel.setFileName(elm.element(NOVEL_FILENAME).getText());
+					novel.setType((String)str);
 					novelList.add(novel);
 				}
 				novelMap.put(str.toString(),novelList);
+			}
+			is = new FileInputStream("config/users.properties");
+			pUser = new Properties();
+			pUser.load(is);
+			String userFileName = pUser.getProperty("用户");
+			Document document = reader.read(new FileReader(userFileName));
+			Element root = document.getRootElement();
+			List<?> elm = root.elements();
+			for (Object user : elm) {
+				Element userElm = (Element)user; 
+				User newUser = new User(userElm.element("username").getText(), userElm.element("password").getText());
+				UserList.add(newUser);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -67,10 +82,14 @@ public class XMLUtils implements Prompt {
 	public static Map<String, List<Novel>> getMap() {
 		return novelMap;
 	}
+	
+	public static List<User> getUserList() {
+		return UserList;
+	}
 
 
 	public static void upload(Novel novel, String type) throws DocumentException, IOException {
-		String typeFileName = p.getProperty(type);
+		String typeFileName = pNovel.getProperty(type);
 		Document document = reader.read(new FileReader(typeFileName));
 		root = document.getRootElement();
 		Element elm = root.addElement(NOVEL_ELM);
@@ -81,13 +100,20 @@ public class XMLUtils implements Prompt {
 		XMLWriter writer = new XMLWriter(new FileWriter(typeFileName));
 		writer.write(document);
 		writer.close();
-		writeFile(novel);
+		NovelUtils.writeFile(novel);
 	}
-
-
-	private static void writeFile(Novel novel) throws IOException {
-		Writer writer = new FileWriter("novel/" + novel.getName() + ".txt");
-		writer.write(novel.getContent());
+	
+	
+	public static void addUserInXML(User user) throws DocumentException, IOException {
+		String userFileName = pUser.getProperty("用户");
+		Document document = reader.read(new FileReader(userFileName));
+		root = document.getRootElement();
+		Element elm = root.addElement(USER_ELM);
+		elm.addElement(USER_USERNAME).addText(user.getUsername());
+		elm.addElement(USER_PASSWORD).addText(user.getPassword());
+		XMLWriter writer = new XMLWriter(new FileWriter(userFileName));
+		writer.write(document);
 		writer.close();
 	}
+
 }

@@ -16,6 +16,7 @@ public class UploadServiceImpl implements Service,Prompt{
 		String command = data.getCommand();
 		String type = NovelUtils.getUploadCommandByCommand(command);
 		Novel novel = (Novel)data.getObject();
+		novel.setType(type);
 		String name = novel.getName();
 		boolean flag = novelDao.isContains(name, type);
 		if(flag) {

@@ -3,13 +3,17 @@ package cn.kgc.util;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+
+import cn.kgc.model.Novel;
 
 public class NovelUtils {
 	public static Map<String, String> commandMap = new HashMap<>();	//协议命令容器
@@ -33,58 +37,34 @@ public class NovelUtils {
 			e.printStackTrace();
 		}		
 	}
-	/**
-	 * 根据路径获取文件，读取文档，转字节数组
-	 * @param fileName
-	 * @return
-	 * @throws IOException 
-	 */
-	public static String getText(String fileName) throws IOException {
-		StringBuilder sb = new StringBuilder();
-		Reader reader = null;
-		BufferedReader br = null;
-		String str = null;
-		try {
-			reader = new FileReader(fileName);
-			br = new BufferedReader(reader);
-			while((str = br.readLine()) != null) {
-				sb.append(str);
-			}
-		} catch (FileNotFoundException e) {
-			throw new FileNotFoundException();
-		}  catch (IOException e) {
-			throw new IOException();
-		} finally {
-			try {
-				reader.close();		
-				br.close();
-			} catch (Exception e2) {
-
-			}
-		}
-		return sb.toString();
-	}
+	
+	
 	public static String getUploadCommandByCommand(String string) {	
 		return commandMap.get(string);
 	}
 	/**
 	 * 根据文件地址获取小说内容
 	 * @param fileName
+	 * @param type 
 	 * @return
 	 * @throws IOException 
 	 */
-	public static String getNovelContent(String fileName) throws IOException {
-		System.out.println(fileName);
-		System.out.println("novel/" + fileName);
-		Reader reader = new FileReader("novel/" + fileName);
+	public static String getNovelContent(String fileName, String type) throws IOException {
+		Reader reader = new FileReader("novel/" + type + "/" + fileName);
 		BufferedReader br = new BufferedReader(reader);
 		StringBuilder sb = new StringBuilder();
-		System.out.println(1111);
 		for(int i=0;i<10;i++) {
-			sb.append(br.readLine());
+			sb.append(br.readLine() + "\n");
 		}		
 		br.close();
 		return sb.toString();
+	}
+	
+	
+	public static void writeFile(Novel novel) throws IOException {
+		Writer writer = new FileWriter("novel/" + novel.getType() + "/" + novel.getName() + ".txt");
+		writer.write(novel.getContent());
+		writer.close();
 	}
 
 }

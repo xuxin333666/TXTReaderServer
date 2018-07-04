@@ -24,7 +24,7 @@ public class RegisterServiceImpl implements Service,Prompt {
 		return data;
 	}
 	
-	public User register(String username, String password) throws Exception {
+	private User register(String username, String password) throws Exception {
 		User user = userDao.queryByName(username);
 		if(!(user == null)) {
 			throw new Exception(USER_EXIST);

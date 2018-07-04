@@ -1,5 +1,9 @@
 package cn.kgc.dao.intf;
 
+import java.io.IOException;
+
+import org.dom4j.DocumentException;
+
 import cn.kgc.model.User;
 
 public interface UserDao {
@@ -9,8 +13,10 @@ public interface UserDao {
 	 * @param username
 	 * @param password
 	 * @return
+	 * @throws IOException 
+	 * @throws DocumentException 
 	 */
-	User register(String username, String password);
+	User register(String username, String password) throws DocumentException, IOException;
 	/**
 	 * 根据参数查找是否存在该用户
 	 * @param username

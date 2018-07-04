@@ -37,6 +37,9 @@ public interface Prompt {
 	String WUXIA = "武侠";	//	武侠命令
 	String YANQING = "言情";	//言情命令
 	String NOVE_LIST_PRINT = "序号\t小说名\t作者\t简介";	//小说列表输出
+	String USER_ELM = "user";	//用户XML标签名称
+	String USER_USERNAME = "username";	//用户名的XML标签名
+	String USER_PASSWORD = "password";	//用户密码的XML标签名
 	String NOVEL_ELM = "novel";	//小说XML标签名称
 	String NOVEL_NAME = "name";	//小说名称的XML标签名
 	String NOVEL_AUTHOR = "author";	//小说作者的XML标签名

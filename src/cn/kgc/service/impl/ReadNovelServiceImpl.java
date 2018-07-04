@@ -16,8 +16,9 @@ public class ReadNovelServiceImpl implements Service,Prompt {
 	public DataTransmission start(DataTransmission data) {
 		Novel novel = (Novel)data.getObject();
 		String fileName = novel.getFileName();
+		String type = novel.getType();
 		try {
-			String content = novelDao.getNovelContent(fileName);
+			String content = novelDao.getNovelContent(fileName,type);
 			data.setStatus(SUCCUSS);
 			data.setResult(content);
 		} catch (IOException e) {
